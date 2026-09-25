@@ -24,14 +24,14 @@ button{font:inherit}.btn{border:0;border-radius:13px;padding:11px 13px;backgroun
 .modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;align-items:flex-end;justify-content:center}.sheet{width:min(480px,100%);background:#fff;border-radius:25px 25px 0 0;padding:20px;max-height:88vh;overflow:auto}input,select{width:100%;padding:11px;border:1px solid #d7dfd9;border-radius:11px;font-size:16px;margin:4px 0 10px}.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}.note{background:#f3f6f3;padding:10px;border-radius:10px;color:var(--mut);font-size:12px}
 .celebrate{display:none;position:fixed;inset:0;z-index:50;background:#173d2beF;color:white;align-items:center;justify-content:center;text-align:center;padding:30px}.celebrate.show{display:flex}.celebrate h2{font-size:39px;margin:8px 0}.celebrate .emoji{font-size:72px}.celebrate button{margin-top:20px;background:white;color:var(--g);border:0;border-radius:16px;padding:13px 25px;font-weight:900}
 </style><script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script></head><body><div class="app">
-<div class="hero"><small>山脚 <span style="font-size:12px;opacity:.72;font-weight:700">v24</span></small><h1>山脚</h1><p>歩く。登る。食べる。</p></div>
+<div class="hero"><small>山脚 <span style="font-size:12px;opacity:.72;font-weight:700">v25</span></small><h1>山脚</h1><p>歩く。登る。食べる。</p></div>
 
 <div id="home" class="screen active"><div class="grid">
 <div class="dateNav"><button onclick="shiftSelectedDate(-1)">‹</button><div class="dateCenter"><b id="selectedDateLabel">今日</b><span id="selectedDateFull"></span></div><button id="nextDateBtn" onclick="shiftSelectedDate(1)">›</button></div>
 <div class="card wide"><div class="row"><div><div class="label">選択日のランチ</div><div class="big"><span id="lc">0</span>/3 達成</div></div><b id="lmsg">昼から身体をつくる</b></div>
 <div class="lunch"><button class="food" id="rice" onclick="food('rice')"><span class="ico">🍙</span>おにぎり<br>1個</button><button class="food" id="veg" onclick="food('veg')"><span class="ico">🥤</span>野菜<br>ジュース</button><button class="food" id="protein" onclick="proteinModal.style.display='flex'"><span class="ico">🥚</span>タンパク質<br>1品</button></div><div class="sub" id="pname" style="margin-top:8px"></div></div>
 
-<div class="card"><div class="label">今週の階段</div><div class="stairSplit"><div><div class="sub">⬆️ 上り</div><div class="big"><span id="stairsUp">0</span>/<span id="stairsUpGoal">10</span></div><div class="bar"><div class="fill" id="sub"></div></div><div class="quick"><button onclick="addStair('up',1)">＋1</button><button onclick="addStair('up',2)">＋2</button></div></div><div><div class="sub">⬇️ 下り</div><div class="big"><span id="stairsDown">0</span>/<span id="stairsDownGoal">10</span></div><div class="bar"><div class="fill" id="sdb"></div></div><div class="quick"><button onclick="addStair('down',1)">＋1</button><button onclick="addStair('down',2)">＋2</button></div></div></div></div>
+<div class="card"><div class="label">今週の階段</div><div class="stairSplit"><div><div class="sub">⬆️ 上り</div><div class="big"><span id="stairsUp">0</span>/<span id="stairsUpGoal">10</span></div><div class="bar"><div class="fill" id="sub"></div></div><div class="quick"><button onclick="addStair('up',-1)">−1</button><button onclick="addStair('up',1)">＋1</button><button onclick="addStair('up',2)">＋2</button></div></div><div><div class="sub">⬇️ 下り</div><div class="big"><span id="stairsDown">0</span>/<span id="stairsDownGoal">10</span></div><div class="bar"><div class="fill" id="sdb"></div></div><div class="quick"><button onclick="addStair('down',-1)">−1</button><button onclick="addStair('down',1)">＋1</button><button onclick="addStair('down',2)">＋2</button></div></div></div></div>
 <div class="card"><div class="label">選択日の歩数</div><div class="big"><span id="walk">0</span>/<span id="walkGoal">10,000</span>歩</div><div class="bar"><div class="fill" id="wb"></div></div><input id="stepInput" type="number" min="0" step="100" inputmode="numeric" placeholder="選択日の歩数" style="margin:8px 0 6px"><button class="btn" style="width:100%" onclick="saveSteps()">歩数を記録</button></div>
 
 <div class="card wide"><div class="label">選択日の山脚ミッション</div><div class="history">
@@ -157,7 +157,7 @@ function saveProtein(){
  const r=dayrec(),was=isClear(r);r.protein=true;r.proteinName=psel.value;proteinModal.style.display='none';save();render(was);
  lunchPraise(r,'💪','タンパク質OK！',r.proteinName+'で身体づくり。');
 }
-function addStair(dir,n){const r=dayrec(),was=isClear(r),k=dir==='up'?'stairsUp':'stairsDown';r[k]=Math.max(0,(r[k]||0)+n);save();render(was);praise(dir==='up'?'⬆️':'⬇️',cheers[Math.floor(Math.random()*cheers.length)],'階段 '+(dir==='up'?'上り':'下り')+' ＋'+n);}
+function addStair(dir,n){const r=dayrec(),was=isClear(r),k=dir==='up'?'stairsUp':'stairsDown';r[k]=Math.max(0,(r[k]||0)+n);save();render(was);praise(dir==='up'?'⬆️':'⬇️',cheers[Math.floor(Math.random()*cheers.length)],'階段 '+(dir==='up'?'上り':'下り')+' '+(n>0?'＋':'')+n);}
 function saveSteps(){
  const r=dayrec(),was=isClear(r),v=Math.max(0,parseInt(stepInput.value||0,10));
  r.steps=v;r.walk=v>=state.goals.steps?1:0;save();render(was);
