@@ -1,7 +1,9 @@
 {
   "name": "山脚",
   "short_name": "山脚",
-  "start_url": "/",
+  "id": "/yamaashi/",
+  "start_url": "/yamaashi/",
+  "scope": "/yamaashi/",
   "display": "standalone",
   "background_color": "#f4f6f2",
   "theme_color": "#244f3b",
