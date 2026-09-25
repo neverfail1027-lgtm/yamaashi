@@ -24,14 +24,14 @@ button{font:inherit}.btn{border:0;border-radius:13px;padding:11px 13px;backgroun
 .modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;align-items:flex-end;justify-content:center}.sheet{width:min(480px,100%);background:#fff;border-radius:25px 25px 0 0;padding:20px;max-height:88vh;overflow:auto}input,select{width:100%;padding:11px;border:1px solid #d7dfd9;border-radius:11px;font-size:16px;margin:4px 0 10px}.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}.note{background:#f3f6f3;padding:10px;border-radius:10px;color:var(--mut);font-size:12px}
 .celebrate{display:none;position:fixed;inset:0;z-index:50;background:#173d2beF;color:white;align-items:center;justify-content:center;text-align:center;padding:30px}.celebrate.show{display:flex}.celebrate h2{font-size:39px;margin:8px 0}.celebrate .emoji{font-size:72px}.celebrate button{margin-top:20px;background:white;color:var(--g);border:0;border-radius:16px;padding:13px 25px;font-weight:900}
 </style><script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script></head><body><div class="app">
-<div class="hero"><small>山脚 <span style="font-size:12px;opacity:.72;font-weight:700">v25</span></small><h1>山脚</h1><p>歩く。登る。食べる。</p></div>
+<div class="hero"><small>山脚 <span style="font-size:12px;opacity:.72;font-weight:700">v26</span></small><h1>山脚</h1><p>歩く。登る。食べる。</p></div>
 
 <div id="home" class="screen active"><div class="grid">
 <div class="dateNav"><button onclick="shiftSelectedDate(-1)">‹</button><div class="dateCenter"><b id="selectedDateLabel">今日</b><span id="selectedDateFull"></span></div><button id="nextDateBtn" onclick="shiftSelectedDate(1)">›</button></div>
 <div class="card wide"><div class="row"><div><div class="label">選択日のランチ</div><div class="big"><span id="lc">0</span>/3 達成</div></div><b id="lmsg">昼から身体をつくる</b></div>
 <div class="lunch"><button class="food" id="rice" onclick="food('rice')"><span class="ico">🍙</span>おにぎり<br>1個</button><button class="food" id="veg" onclick="food('veg')"><span class="ico">🥤</span>野菜<br>ジュース</button><button class="food" id="protein" onclick="proteinModal.style.display='flex'"><span class="ico">🥚</span>タンパク質<br>1品</button></div><div class="sub" id="pname" style="margin-top:8px"></div></div>
 
-<div class="card"><div class="label">今週の階段</div><div class="stairSplit"><div><div class="sub">⬆️ 上り</div><div class="big"><span id="stairsUp">0</span>/<span id="stairsUpGoal">10</span></div><div class="bar"><div class="fill" id="sub"></div></div><div class="quick"><button onclick="addStair('up',-1)">−1</button><button onclick="addStair('up',1)">＋1</button><button onclick="addStair('up',2)">＋2</button></div></div><div><div class="sub">⬇️ 下り</div><div class="big"><span id="stairsDown">0</span>/<span id="stairsDownGoal">10</span></div><div class="bar"><div class="fill" id="sdb"></div></div><div class="quick"><button onclick="addStair('down',-1)">−1</button><button onclick="addStair('down',1)">＋1</button><button onclick="addStair('down',2)">＋2</button></div></div></div></div>
+<div class="card"><div class="label">選択日の階段</div><div class="stairSplit"><div><div class="sub">⬆️ 上り</div><div class="big"><span id="stairsUp">0</span>/<span id="stairsUpGoal">10</span></div><div class="bar"><div class="fill" id="sub"></div></div><div class="quick"><button onclick="addStair('up',-1)">−1</button><button onclick="addStair('up',1)">＋1</button><button onclick="addStair('up',2)">＋2</button></div></div><div><div class="sub">⬇️ 下り</div><div class="big"><span id="stairsDown">0</span>/<span id="stairsDownGoal">10</span></div><div class="bar"><div class="fill" id="sdb"></div></div><div class="quick"><button onclick="addStair('down',-1)">−1</button><button onclick="addStair('down',1)">＋1</button><button onclick="addStair('down',2)">＋2</button></div></div></div></div>
 <div class="card"><div class="label">選択日の歩数</div><div class="big"><span id="walk">0</span>/<span id="walkGoal">10,000</span>歩</div><div class="bar"><div class="fill" id="wb"></div></div><input id="stepInput" type="number" min="0" step="100" inputmode="numeric" placeholder="選択日の歩数" style="margin:8px 0 6px"><button class="btn" style="width:100%" onclick="saveSteps()">歩数を記録</button></div>
 
 <div class="card wide"><div class="label">選択日の山脚ミッション</div><div class="history">
@@ -60,7 +60,7 @@ button{font:inherit}.btn{border:0;border-radius:13px;padding:11px 13px;backgroun
 
 <nav class="nav"><button onclick="show('home')"><b>⌂</b>ホーム</button><button onclick="hikeModal.style.display='flex'"><b>⛰</b>登山</button><button onclick="show('records')"><b>▥</b>記録</button><button onclick="settings.style.display='flex'"><b>⚙</b>設定</button></nav></div>
 
-<div class="modal" id="proteinModal"><div class="sheet"><h2>🥚 タンパク質系</h2><select id="psel"><option>ゆで卵</option><option>サラダチキン</option><option>魚・焼き魚</option><option>豆腐・豆製品</option><option>ヨーグルト</option><option>その他</option></select><div class="row"><button class="btn ghost" onclick="proteinModal.style.display='none'">閉じる</button><button class="btn" onclick="saveProtein()">記録</button></div></div></div>
+<div class="modal" id="proteinModal"><div class="sheet"><h2>🥚 タンパク質系</h2><select id="psel"><option>ゆで卵</option><option>サラダチキン</option><option>魚・焼き魚</option><option>カニカマ・海鮮スティック</option><option>豆腐・豆製品</option><option>ヨーグルト</option><option>その他</option></select><div class="row"><button class="btn ghost" onclick="proteinModal.style.display='none'">閉じる</button><button class="btn" onclick="saveProtein()">記録</button></div></div></div>
 
 <div class="modal" id="hikeModal"><div class="sheet">
 <h2>📷 登山記録</h2>
@@ -135,7 +135,7 @@ function calc(){
  Object.entries(state.days).forEach(([date,r])=>{
    totalStairsUp+=r.stairsUp||0; totalStairsDown+=r.stairsDown||0; totalWalk+=r.steps||0; if(isLunch(r))totalLunch++;
    if(monthOf(date)===month){monthStairsUp+=r.stairsUp||0;monthStairsDown+=r.stairsDown||0;monthWalk+=r.steps||0;if(isLunch(r))monthLunch++}
-   if(date>=mon&&date<=anchor){weekStairsUp+=r.stairsUp||0;weekStairsDown+=r.stairsDown||0;weekWalk+=r.steps||0;if(isLunch(r))weekLunch++}
+   const weekEnd=fmt((()=>{const x=parseDate(mon);x.setDate(x.getDate()+6);return x})()); if(date>=mon&&date<=weekEnd){weekStairsUp+=r.stairsUp||0;weekStairsDown+=r.stairsDown||0;weekWalk+=r.steps||0;if(isLunch(r))weekLunch++}
  });
  let streak=0,d=parseDate(today);
  while(true){let k=fmt(d),r=state.days[k];if(r&&isClear(r)){streak++;d.setDate(d.getDate()-1)}else break}
@@ -195,8 +195,8 @@ function render(wasClear=null){
  const r=dayrec(),a=calc(),c=['rice','veg','protein'].filter(x=>r[x]).length;
  lc.textContent=c;lmsg.textContent=c===3?'完璧なランチ！ ✓':'あと'+(3-c)+'つ';
  ['rice','veg','protein'].forEach(x=>document.getElementById(x).classList.toggle('done',!!r[x]));pname.textContent=r.proteinName?'選択日：'+r.proteinName:'';
- stairsUp.textContent=a.weekStairsUp;stairsDown.textContent=a.weekStairsDown;walk.textContent=(r.steps||0).toLocaleString();stairsUpGoal.textContent=state.goals.stairsUp;stairsDownGoal.textContent=state.goals.stairsDown;walkGoal.textContent=state.goals.steps.toLocaleString();stepInput.value=r.steps||'';
- sub.style.width=Math.min(100,a.weekStairsUp/state.goals.stairsUp*100)+'%';sdb.style.width=Math.min(100,a.weekStairsDown/state.goals.stairsDown*100)+'%';wb.style.width=Math.min(100,(r.steps||0)/state.goals.steps*100)+'%';
+ stairsUp.textContent=r.stairsUp||0;stairsDown.textContent=r.stairsDown||0;walk.textContent=(r.steps||0).toLocaleString();stairsUpGoal.textContent=state.goals.stairsUp;stairsDownGoal.textContent=state.goals.stairsDown;walkGoal.textContent=state.goals.steps.toLocaleString();stepInput.value=r.steps||'';
+ sub.style.width=Math.min(100,(r.stairsUp||0)/state.goals.stairsUp*100)+'%';sdb.style.width=Math.min(100,(r.stairsDown||0)/state.goals.stairsDown*100)+'%';wb.style.width=Math.min(100,(r.steps||0)/state.goals.steps*100)+'%';
  dlb.style.width=c/3*100+'%';dlt.textContent=c+'/3';dsub.style.width=((r.stairsUp||0)?100:0)+'%';dsut.textContent=((r.stairsUp||0)?'1':'0')+'/1';dsdb.style.width=((r.stairsDown||0)?100:0)+'%';dsdt.textContent=((r.stairsDown||0)?'1':'0')+'/1';dwb.style.width=Math.min(100,(r.steps||0)/state.goals.steps*100)+'%';dwt.textContent=(r.steps||0).toLocaleString()+'/'+state.goals.steps.toLocaleString();
  let clear=isClear(r);dailyAward.classList.toggle('show',clear);
  streak.textContent=a.streak;best.textContent=state.best||0;streakMsg.textContent=a.streak>=30?'30日連続！もう立派な習慣だ🔥':a.streak>=14?'14日連続！2週間やり切った🔥':a.streak>=7?'7日連続！1週間達成🔥':a.streak>=3?a.streak+'日連続！いい流れ🔥':a.streak===2?'2日連続！明日で3日バッジ🔥':a.streak===1?'🔥 1日目達成！明日もつなげよう':'今日の全クリアでスタート';
